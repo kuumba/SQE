@@ -1,4 +1,7 @@
+# Byte-compiled / optimized / DLL files
+TestScripts/__pycache__/
+*.py[cod]
+
 TestScripts/screenshots
 TestScripts/sandbox.py
-TestScripts/__pycache__
 .DS_Store

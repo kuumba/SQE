@@ -28,17 +28,25 @@ def test_positive_form_submission():
     radio_button = driver.find_element(By.XPATH, "//input[@value='three']")
     radio_button.click()
 
+    checkbox = driver.find_element(By.ID, "ip")
+    checkbox.click()
 
+    multiselect_dropdown_element = driver.find_element(By.ID, "tools")    
+    select = Select(multiselect_dropdown_element)
+    select.select_by_visible_text("Selenium")
+    multi_selected_option = select.first_selected_option
 
     assert selected_option.text == "Male"
     assert radio_button.is_selected
+    assert checkbox.is_enabled
+    assert multi_selected_option.is_enabled
+
 
     driver.find_element(By.ID, "submit").submit
 #   driver.find_element(By.ID, "fax").send_keys("954-123-4567")
 
 def test_screenshots():
     now = datetime.now()
-   # driver.save_screenshot(now + ".jpg")
     formatted_datetime = now.strftime("%m%d%Y.%H%M%S")
     driver.save_screenshot('./screenshots/' + formatted_datetime + ".png")
     print(formatted_datetime)

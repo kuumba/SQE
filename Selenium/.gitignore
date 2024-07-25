@@ -1,4 +1,4 @@
-screenshots
-sandbox.py
-__pycache__
+TestScripts/screenshots
+TestScripts/sandbox.py
+TestScripts/__pycache__
 .DS_Store

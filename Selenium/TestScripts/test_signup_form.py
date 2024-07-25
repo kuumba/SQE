@@ -9,13 +9,15 @@ import time
 from datetime import datetime
 
 
-@pytest.mark.parametrize('username, email',[
-    ('Mark','mark@gmail.com'),
-    ('John','john@gmail.com')
+@pytest.mark.parametrize('username, email, phone_number',[
+    ('Mark','mark@gmail.com', '123-456-7890'),
+    ('John','john@gmail.com', '346-433-7420'),
+    ('Sally','sally@gmail.com', '773-432-6690')
+
 ])
 
 
-def test_positive_form_submission(username, email):
+def test_positive_form_submission(username, email, phone_number):
     now = datetime.now()
     driver = webdriver.Chrome()
 
@@ -24,7 +26,7 @@ def test_positive_form_submission(username, email):
 
     driver.find_element(By.ID, "username").send_keys(username)
     driver.find_element(By.ID, "email").send_keys(email)
-    driver.find_element(By.ID, "tel").send_keys("954-903-7336")
+    driver.find_element(By.ID, "tel").send_keys(phone_number)
 
     dropdown_element = driver.find_element(By.NAME, "sgender")    
     select = Select(dropdown_element)

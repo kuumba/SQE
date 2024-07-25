@@ -5,3 +5,5 @@ TestScripts/__pycache__/
 TestScripts/screenshots
 TestScripts/sandbox.py
 .DS_Store
+
+.venv

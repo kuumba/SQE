@@ -9,15 +9,21 @@ import time
 from datetime import datetime
 
 
-driver = webdriver.Chrome()
+@pytest.mark.parametrize('username, email',[
+    ('Mark','mark@gmail.com'),
+    ('John','john@gmail.com')
+])
 
-def test_page_load():
+
+def test_positive_form_submission(username, email):
+    now = datetime.now()
+    driver = webdriver.Chrome()
+
     driver.get("https://qavbox.github.io/demo/signup")
     assert driver.title == "Registration Form"
 
-def test_positive_form_submission():
-    driver.find_element(By.ID, "username").send_keys("JohnDoe")
-    driver.find_element(By.ID, "email").send_keys("JohnDoe@gmail.com")
+    driver.find_element(By.ID, "username").send_keys(username)
+    driver.find_element(By.ID, "email").send_keys(email)
     driver.find_element(By.ID, "tel").send_keys("954-903-7336")
 
     dropdown_element = driver.find_element(By.NAME, "sgender")    
@@ -36,19 +42,17 @@ def test_positive_form_submission():
     select.select_by_visible_text("Selenium")
     multi_selected_option = select.first_selected_option
 
+#   driver.find_element(By.ID, "fax").send_keys("954-123-4567")
+
+    formatted_datetime = now.strftime("%m%d%Y.%H%M%S")
+    driver.save_screenshot('./screenshots/' + formatted_datetime + ".png")
+    print(formatted_datetime)
+
+    driver.find_element(By.ID, "submit").submit
+
     assert selected_option.text == "Male"
     assert radio_button.is_selected
     assert checkbox.is_enabled
     assert multi_selected_option.is_enabled
-
-
-    driver.find_element(By.ID, "submit").submit
-#   driver.find_element(By.ID, "fax").send_keys("954-123-4567")
-
-def test_screenshots():
-    now = datetime.now()
-    formatted_datetime = now.strftime("%m%d%Y.%H%M%S")
-    driver.save_screenshot('./screenshots/' + formatted_datetime + ".png")
-    print(formatted_datetime)
 
     driver.quit()
